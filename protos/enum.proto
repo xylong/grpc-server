@@ -1,5 +1,7 @@
 syntax="proto3";
 
+option go_package="grpc-server/pb";
+
 enum EmployeeStatus {
     NORMAL=0;
     ONVACATION=1;

@@ -1,6 +1,8 @@
 syntax="proto3";
 
-import "messages/enum.proto";
+option go_package="grpc-server/pb";
+
+import "enum.proto";
 import "google/protobuf/timestamp.proto";
 
 message Employee {
