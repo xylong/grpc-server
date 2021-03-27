@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"net"
+	"time"
 )
 
 const (
@@ -27,7 +28,14 @@ func (s *employeeService) GetByNo(ctx context.Context, req *pb.GetByNoRequest) (
 	return nil, errors.New("employee not found")
 }
 
-func (s *employeeService) GetAll(*pb.GetAllRequest, pb.EmployeeService_GetAllServer) error {
+func (s *employeeService) GetAll(req *pb.GetAllRequest, stream pb.EmployeeService_GetAllServer) error {
+	for _, e := range employees {
+		stream.Send(&pb.EmployeeResponse{
+			Employee: &e,
+		})
+
+		time.Sleep(time.Second * 2) // 模拟streaming
+	}
 	return nil
 }
 func (s *employeeService) AddPhoto(pb.EmployeeService_AddPhotoServer) error {

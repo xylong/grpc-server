@@ -21,5 +21,18 @@ var employees = []pb.Employee{
 			Seconds: time.Now().Unix(),
 		},
 	},
+	{
+		Id:        2,
+		No:        1991,
+		FirstName: "静",
+		LastName:  "静",
+		MonthSalary: &pb.MonthSalary{
+			Basic: 20000,
+			Bouns: 9800.5,
+		},
+		Status: pb.EmployeeStatus_NORMAL,
+		LastModfied: &timestamppb.Timestamp{
+			Seconds: time.Now().Unix(),
+		},
+	},
 }
-
