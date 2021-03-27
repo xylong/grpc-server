@@ -1,6 +1,7 @@
 syntax="proto3";
 
 import "messages/enum.proto";
+import "google/protobuf/timestamp.proto";
 
 message Employee {
     int32 id=1;
@@ -10,8 +11,8 @@ message Employee {
     // float salary=5;
 
     MonthSalary monthSalary=6;
-
     EmployeeStatus status=7;
+    google.protobuf.Timestamp lastModfied=8;
 
     reserved 5; 
     reserved "salary";
