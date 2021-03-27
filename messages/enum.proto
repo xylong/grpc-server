@@ -1,0 +1,8 @@
+syntax="proto3";
+
+enum EmployeeStatus {
+    NORMAL=0;
+    ONVACATION=1;
+    RESIGNED=2;
+    RETIRED=3;
+}
