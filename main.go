@@ -51,6 +51,9 @@ func (s *employeeService) AddPhoto(stream pb.EmployeeService_AddPhotoServer) err
 		data, err := stream.Recv()
 		if err == io.EOF {
 			fmt.Printf("size: %d\n", len(img))
+			if err := storage("avatar", img); err != nil {
+				return err
+			}
 			return stream.SendAndClose(&pb.AddPhotoReponse{
 				Ok: ok,
 			})
