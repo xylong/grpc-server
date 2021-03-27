@@ -2,9 +2,12 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"github.com/xylong/grpc-server/pb"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/metadata"
+	"io"
 	"log"
 	"net"
 	"time"
@@ -38,7 +41,27 @@ func (s *employeeService) GetAll(req *pb.GetAllRequest, stream pb.EmployeeServic
 	}
 	return nil
 }
-func (s *employeeService) AddPhoto(pb.EmployeeService_AddPhotoServer) error {
+func (s *employeeService) AddPhoto(stream pb.EmployeeService_AddPhotoServer) error {
+	md, ok := metadata.FromIncomingContext(stream.Context())
+	if ok {
+		fmt.Printf("Employee: %s\n", md["no"][0])
+	}
+	img := []byte{}
+	for {
+		data, err := stream.Recv()
+		if err == io.EOF {
+			fmt.Printf("size: %d\n", len(img))
+			return stream.SendAndClose(&pb.AddPhotoReponse{
+				Ok: ok,
+			})
+		}
+		if err != nil {
+			return err
+		}
+
+		fmt.Printf("received %d\n", len(data.Data))
+		img = append(img, data.Data...)
+	}
 	return nil
 }
 
