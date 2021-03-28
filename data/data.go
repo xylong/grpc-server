@@ -1,4 +1,4 @@
-package main
+package data
 
 import (
 	"github.com/xylong/grpc-server/pb"
@@ -6,10 +6,10 @@ import (
 	"time"
 )
 
-var employees = []pb.Employee{
+var Employees = []pb.Employee{
 	{
 		Id:        1,
-		No:        1990,
+		No:        1,
 		FirstName: "li",
 		LastName:  "lin",
 		MonthSalary: &pb.MonthSalary{
@@ -23,7 +23,7 @@ var employees = []pb.Employee{
 	},
 	{
 		Id:        2,
-		No:        1991,
+		No:        2,
 		FirstName: "静",
 		LastName:  "静",
 		MonthSalary: &pb.MonthSalary{

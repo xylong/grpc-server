@@ -1,4 +1,4 @@
-package main
+package helper
 
 import (
 	"fmt"
@@ -8,7 +8,8 @@ import (
 	"time"
 )
 
-func storage(path string, bytes []byte) error {
+// Save 保存文件
+func Save(path string, bytes []byte) error {
 	_ = os.MkdirAll(path, 0666)
 	fileName := fmt.Sprintf("%s/%d.jpg", path, randName())
 	return ioutil.WriteFile(fileName, bytes, 0666)
