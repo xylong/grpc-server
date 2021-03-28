@@ -79,5 +79,24 @@ func (s *EmployeeService) Save(ctx context.Context, request *pb.EmployeeRequest)
 }
 
 func (s *EmployeeService) SaveAll(server pb.EmployeeService_SaveAllServer) error {
+	for {
+		req, err := server.Recv()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return err
+		}
+
+		data.Employees = append(data.Employees, *req.GetEmployee())
+		server.Send(&pb.EmployeeResponse{
+			Employee: req.Employee,
+		})
+	}
+
+	for _, e := range data.Employees {
+		fmt.Println(e)
+	}
+
 	return nil
 }
